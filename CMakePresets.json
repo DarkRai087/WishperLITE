@@ -1,0 +1,96 @@
+{
+    "version": 6,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 25,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "default",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_CXX_STANDARD": "20",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            }
+        },
+        {
+            "name": "debug",
+            "displayName": "Debug",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "LOCALVOICE_BUILD_TESTS": "ON",
+                "LOCALVOICE_BUILD_BENCHMARKS": "OFF"
+            }
+        },
+        {
+            "name": "release",
+            "displayName": "Release",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "LOCALVOICE_BUILD_TESTS": "OFF",
+                "LOCALVOICE_BUILD_BENCHMARKS": "ON"
+            }
+        },
+        {
+            "name": "relwithdebinfo",
+            "displayName": "Release with Debug Info",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "LOCALVOICE_BUILD_TESTS": "ON",
+                "LOCALVOICE_BUILD_BENCHMARKS": "ON"
+            }
+        },
+        {
+            "name": "debug-cuda",
+            "displayName": "Debug + CUDA",
+            "inherits": "debug",
+            "cacheVariables": {
+                "LOCALVOICE_ENABLE_CUDA": "ON",
+                "CMAKE_CUDA_ARCHITECTURES": "75"
+            }
+        },
+        {
+            "name": "release-cuda",
+            "displayName": "Release + CUDA",
+            "inherits": "release",
+            "cacheVariables": {
+                "LOCALVOICE_ENABLE_CUDA": "ON",
+                "CMAKE_CUDA_ARCHITECTURES": "75"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "debug",
+            "configurePreset": "debug"
+        },
+        {
+            "name": "release",
+            "configurePreset": "release"
+        },
+        {
+            "name": "relwithdebinfo",
+            "configurePreset": "relwithdebinfo"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "debug",
+            "configurePreset": "debug",
+            "output": {
+                "outputOnFailure": true
+            }
+        }
+    ]
+}

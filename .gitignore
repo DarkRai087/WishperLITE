@@ -1,0 +1,44 @@
+# Build directories
+build/
+out/
+cmake-build-*/
+
+# IDE
+.vs/
+.vscode/
+*.suo
+*.user
+*.sln.docstates
+.idea/
+
+# Compiled
+*.obj
+*.o
+*.exe
+*.dll
+*.lib
+*.exp
+*.pdb
+*.ilk
+
+# Models (user-downloaded, too large for git)
+models/*.bin
+models/*.ggml
+
+# Logs
+logs/
+*.log
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Temp
+*.tmp
+*.swp
+*~
+
+# Test artifacts
+hello.c++
+hello.exe
